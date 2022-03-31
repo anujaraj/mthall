@@ -1,0 +1,426 @@
+<html>
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- update the version number as needed -->
+<script defer src="/__/firebase/9.5.0/firebase-app-compat.js"></script>
+<!-- include only the Firebase features as you need -->
+<script defer src="/__/firebase/9.5.0/firebase-auth-compat.js"></script>
+<script defer src="/__/firebase/9.5.0/firebase-database-compat.js"></script>
+<script defer src="/__/firebase/9.5.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/9.5.0/firebase-functions-compat.js"></script>
+<script defer src="/__/firebase/9.5.0/firebase-messaging-compat.js"></script>
+<script defer src="/__/firebase/9.5.0/firebase-storage-compat.js"></script>
+<script defer src="/__/firebase/9.5.0/firebase-analytics-compat.js"></script>
+<script defer src="/__/firebase/9.5.0/firebase-remote-config-compat.js"></script>
+<script defer src="/__/firebase/9.5.0/firebase-performance-compat.js"></script>
+<!-- 
+  initialize the SDK after all desired features are loaded, set useEmulator to false
+  to avoid connecting the SDK to running emulators.
+-->
+<script defer src="/__/firebase/init.js?useEmulator=true"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const loadEl = document.querySelector('#load');
+    // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+    // // The Firebase SDK is initialized and available here!
+    //
+    // firebase.auth().onAuthStateChanged(user => { });
+    // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+    // firebase.firestore().doc('/foo/bar').get().then(() => { });
+    // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+    // firebase.messaging().requestPermission().then(() => { });
+    // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+    // firebase.analytics(); // call to activate
+    // firebase.analytics().logEvent('tutorial_completed');
+    // firebase.performance(); // call to activate
+    //
+    // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+    try {
+      let app = firebase.app();
+      let features = [
+        'auth', 
+        'database', 
+        'firestore',
+        'functions',
+        'messaging', 
+        'storage', 
+        'analytics', 
+        'remoteConfig',
+        'performance',
+      ].filter(feature => typeof app[feature] === 'function');
+      loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+    } catch (e) {
+      console.error(e);
+      loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+    }
+  });
+</script>
+
+<style>
+* {box-sizing: border-box;}
+body {font-family: Verdana, sans-serif;}
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+  
+}
+
+
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 0;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+a {
+  color: #000;
+}
+
+
+/* header */
+
+.header {
+  background-color: #fff;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+}
+
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+
+@media only screen and (max-width: 200px) {
+  
+  .text {font-size: 11px}
+}
+
+.head{
+ background-color:#87CEFA;
+ height:15%;
+ color:white;
+ font-family: fantasy;
+ font-weight: bold;
+font-size:4vw;
+ text-align: center;
+ font-style:inherit;
+ text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+ border-radius: 25px;
+ width:80%;
+ margin-left: 10%;
+ margin-bottom:2%;
+ margin-top:2%;
+ padding-top:1%
+ 
+ 
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 40%;
+  padding: 0 10px;
+  margin: 2vw;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 5px;margin-top: 2vw;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  
+  
+  
+  text-align: center;
+ 
+  background-color:white;
+  color:white;
+  transition: 4s ease-in-out;
+    animation: reveal 4s  forwards;
+}
+@keyframes reveal{
+   0%{
+     color:black;
+     opacity: 0.3;
+    background-color:white;
+    transform: translateX(-10%);
+   }
+   
+ 
+   100%{
+     
+   color:black;
+   background-color:#87CEFA;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+   transform: translateX(10%);
+   border-radius: 2vw;
+   opacity: 1;
+   
+   }
+ 
+
+ }
+ /* Responsive columns */
+@media screen and (max-width: 800px) {
+  .column{
+    width: 70%;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .projects1{
+    width:5%;
+    padding:0px;
+  }
+  
+}
+
+</style>
+</head>
+<body>
+
+        
+  
+<div class="head" >MOTHER TERESSA HALL OF RESIDENCE, IIT KGP</div>
+<header class="header">
+  
+  <input class="menu-btn" type="checkbox" id="menu-btn" />
+  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  <ul class="menu">
+    <li><a href="./index.html">Our Hall</a></li>
+    <li><a href="./HCM/hcm.html">HCM</a></li>
+
+    <li><a href="./Competitions/competions.html">Competitions</a></li>
+    <li><a href="./Gallery/gallery.html">Gallery</a></li>
+    <li><a href="./calender/calender.html">Major Events</a></li>
+    <li><a href="./Query/query.html">Query</a></li>
+    <li><a href="./Admin/admin.html">Admin</a></li>
+  </ul>
+</header>
+<div style="margin-top:2vw"><br></br><br></div>
+<div class="row">
+          
+  <div class="column">
+    <div class="card">
+      <div class="slideshow-container">
+
+        <div class="mySlides fade">
+          
+          <img src="./images/img1.jpeg" style="width:100%;height:70%">
+          
+        </div>
+        
+        <div class="mySlides fade">
+          
+          <img src="./images/img2.jpeg" style="width:100%;height:70%">
+         
+        </div>
+        
+        <div class="mySlides fade">
+          
+          <img src="./images/img3.jpeg" style="width:100%;height:70%">
+          
+        </div>
+        
+        </div>
+
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <p style="font-size: 15px;font-weight:bold;">Github Repositories<p>
+       
+        <p>Links for schools websites</p>
+        
+    </div>
+  </div>
+  
+
+</div>
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  // dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+
+</body>
+</html> 

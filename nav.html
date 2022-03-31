@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        * {box-sizing: border-box;}
+        body {font-family: Verdana, sans-serif;}
+        
+        img {vertical-align: middle;}
+        
+        
+        
+        /* On smaller screens, decrease text size */
+        @media only screen and (max-width: 300px) {
+          .text {font-size: 11px}
+        }
+        ul {
+          list-style-type: none;
+          margin: 2px 2px;
+          padding: 0;
+          overflow: hidden;
+          background-color: #333;
+        }
+        
+        li {
+          float: left;
+        }
+        
+        li a, .dropbtn {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+        }
+        
+        li a:hover, .dropdown:hover .dropbtn {
+          background-color: #111;
+        }
+        li.dropdown {
+          display: inline-block;
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+        
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          text-align: left;
+        }
+        
+        .dropdown-content a:hover {background-color: #f1f1f1;}
+        
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+        </style>
+        </head>
+        <body>
+            
+                <ul>
+                    <li><a class="active" href="#home">Home</a></li>
+                    <li><a href="./staff/staff.html">Staff</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">Class Details</a>
+                        <div class="dropdown-content">
+                        <a href="./classes/classwise.html#c1">Class 1</a>
+                        <a href="./classes/classwise.html#c2">Class 2</a>
+                        <a href="./classes/classwise.html#c3">Class 3</a>
+                        <a href="./classes/classwise.html#c4">Class 4</a>
+                        <a href="./classes/classwise.html#c5">Class 5</a>
+                        <a href="./classes/classwise.html#c6">Class 6</a>
+                        <a href="./classes/classwise.html#c7">Class 7</a>
+                        <a href="./classes/classwise.html#c8">Class 8</a>
+                        <a href="./classes/classwise.html#c9">Class 9</a>
+                        <a href="./classes/classwise.html#c10">Class 10</a>
+                        <a href="./classes/classwise.html#c11">Class 11</a>
+                        <a href="./classes/classwise.html#c12">Class 12</a>
+                        </div>
+                    </li>
+                    <li><a href="./About/about.html">About</a></li>
+                    <li><a href="./Admin/authen.html">Admin</a></li>
+                
+            </div>
+            
+
+        </body>
+</html>
